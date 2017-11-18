@@ -2,12 +2,7 @@ package com.fip.mvc;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -75,6 +70,13 @@ public class ListDirectoryView extends JFrame {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER){
 				      addButton.doClick();
 				}
+			}
+		});
+
+		inputElement.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				inputElement.selectAll();
 			}
 		});
 
