@@ -5,6 +5,9 @@ package com.fip.mvc;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
+import ru.sidvi.medcine.controller.ListDirectoryController;
+import ru.sidvi.medcine.model.ListDirectoryModel;
+import ru.sidvi.medcine.view.ListDirectoryView;
 import org.fest.swing.edt.FailOnThreadViolationRepaintManager;
 import org.fest.swing.edt.GuiActionRunner;
 import org.fest.swing.edt.GuiQuery;

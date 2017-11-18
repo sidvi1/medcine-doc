@@ -5,6 +5,7 @@ package com.fip.mvc;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
+import ru.sidvi.medcine.model.ListDirectoryModel;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,7 +38,7 @@ public class ListDirectoryModelTest {
 	}
 
 	/**
-	 * Test method for {@link com.fip.mvc.ListDirectoryModel#getElementAt(int)}.
+	 * Test method for {@link ListDirectoryModel#getElementAt(int)}.
 	 */
 	@Test
 	public void testGetElementAt() {
@@ -45,7 +46,7 @@ public class ListDirectoryModelTest {
 	}
 
 	/**
-	 * Test method for {@link com.fip.mvc.ListDirectoryModel#getSize()}.
+	 * Test method for {@link ListDirectoryModel#getSize()}.
 	 */
 	@Test
 	public void testGetSize() {
@@ -54,7 +55,7 @@ public class ListDirectoryModelTest {
 	}
 
 	/**
-	 * Test method for {@link com.fip.mvc.ListDirectoryModel#addDirectory(java.lang.String)}.
+	 * Test method for {@link ListDirectoryModel#addDirectory(java.lang.String)}.
 	 */
 	@Test
 	public void testAddDirectory() {
@@ -64,7 +65,7 @@ public class ListDirectoryModelTest {
 	}
 
 	/**
-	 * Test method for {@link com.fip.mvc.ListDirectoryModel#removeDirectory(java.lang.String)}.
+	 * Test method for {@link ListDirectoryModel#removeDirectory(java.lang.String)}.
 	 */
 	@Test
 	public void testRemoveDirectory() {
