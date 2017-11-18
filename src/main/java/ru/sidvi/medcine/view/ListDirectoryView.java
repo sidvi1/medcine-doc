@@ -74,7 +74,8 @@ public class ListDirectoryView extends JFrame {
 			public void keyReleased(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER){
 				      addButton.doClick();
-				}
+                    inputElement.selectAll();
+                }
 			}
 		});
 
