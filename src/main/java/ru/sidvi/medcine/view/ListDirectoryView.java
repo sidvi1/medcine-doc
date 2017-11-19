@@ -1,7 +1,7 @@
 package ru.sidvi.medcine.view;
 
 import ru.sidvi.medcine.ButtonsListener;
-import ru.sidvi.medcine.renderer.ImageListCellRenderer;
+import ru.sidvi.medcine.view.renderer.ImageListCellRenderer;
 import ru.sidvi.medcine.model.ListDirectoryModel;
 import ru.sidvi.medcine.TextTranslation;
 

@@ -1,6 +1,6 @@
 // ImageListCellRenderer.java
 
-package ru.sidvi.medcine.renderer;
+package ru.sidvi.medcine.view.renderer;
 
 import java.awt.Component;
 import java.net.URL;
