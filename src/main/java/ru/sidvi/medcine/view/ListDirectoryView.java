@@ -28,9 +28,7 @@ public class ListDirectoryView extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
-    private final JButton addButton;
-    private final JButton removeButton;
-    private final JTextField inputElement;
+    private final JTextField searchElement;
     private final JTable viewTable;
 
     /**
@@ -50,6 +48,7 @@ public class ListDirectoryView extends JFrame {
         contentPane.setName(getTitle());
         setContentPane(contentPane);
 
+        // Выход по ESC
         getRootPane()
                 .registerKeyboardAction(new ActionListener() {
                                             @Override
@@ -61,50 +60,50 @@ public class ListDirectoryView extends JFrame {
                         JComponent.WHEN_IN_FOCUSED_WINDOW);
 
         // Create input field row:
-        JLabel entryLabel = new JLabel(t.get("label.input"));
-        inputElement = new JTextField(40);
-        inputElement.setName("inputText");
+        JLabel entryLabel = new JLabel("Фильтр");
+        searchElement = new JTextField(40);
+        searchElement.setName("inputText");
         JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         inputPanel.add(entryLabel);
-        inputPanel.add(inputElement);
+        inputPanel.add(searchElement);
         JPanel inputRowPanel = new JPanel(new BorderLayout());
-        inputRowPanel.setBorder(new TitledBorder(t.get("label.title")));
+        inputRowPanel.setBorder(new EmptyBorder(0, 0, 0, 0));
         inputRowPanel.add(inputPanel);
         contentPane.add(inputRowPanel, BorderLayout.NORTH);
 
-        // Register a KeyListener for the inputElement text field.
-        inputElement.addKeyListener(new KeyAdapter() {
+        // Register a KeyListener for the searchElement text field.
+        searchElement.addKeyListener(new KeyAdapter() {
 
             @Override
             public void keyReleased(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    addButton.doClick();
-                    inputElement.selectAll();
+//                    addButton.doClick();
+                    searchElement.selectAll();
                 }
             }
         });
 
-        inputElement.addFocusListener(new FocusAdapter() {
+        searchElement.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                inputElement.selectAll();
+                searchElement.selectAll();
             }
         });
 
-        // Register a DocumentListener for the inputElement text field.
-        inputElement.getDocument()
+        // Register a DocumentListener for the searchElement text field.
+        searchElement.getDocument()
                 .addDocumentListener(new DocumentListener() {
 
                     @Override
                     public void removeUpdate(DocumentEvent arg0) {
-                        if (inputElement.getText().isEmpty()) {
-                            addButton.setEnabled(false);
+                        if (searchElement.getText().isEmpty()) {
+//                            addButton.setEnabled(false);
                         }
                     }
 
                     @Override
                     public void insertUpdate(DocumentEvent arg0) {
-                        addButton.setEnabled(true);
+//                        addButton.setEnabled(true);
                     }
 
                     @Override
@@ -156,7 +155,7 @@ public class ListDirectoryView extends JFrame {
             @Override
             public void mouseClicked(MouseEvent evt) {
                 if (evt.getClickCount() == 2 && viewTable.getSelectedRow() != -1) {
-//					inputElement.setText(viewTable.getSelectionModel().toString());
+//					searchElement.setText(viewTable.getSelectionModel().toString());
                 }
             }
         });
@@ -175,42 +174,30 @@ public class ListDirectoryView extends JFrame {
 //			}
 //		});
 
-        // Create buttons panel:
-        JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        addButton = new JButton(t.get("button.add"));
-        addButton.setEnabled(false);
-        addButton.setName("add");
-        buttonsPanel.add(addButton);
-
-        removeButton = new JButton(t.get("button.remove"));
-        removeButton.setEnabled(false);
-        removeButton.setName("del");
-        buttonsPanel.add(removeButton);
-        contentPane.add(buttonsPanel, BorderLayout.SOUTH);
     }
 
     public void addButtonsListener(final ButtonsListener l) {
 
-        addButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                l.addPerformed(e);
-
-            }
-        });
-
-        removeButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                l.deletePerformed(e);
-
-            }
-        });
+//
     }
 
-    /**
+    /**  addButton.addActionListener(new ActionListener() {
+     //
+     //            @Override
+     //            public void actionPerformed(ActionEvent e) {
+     //                l.addPerformed(e);
+     //
+     //            }
+     //        });
+     //
+     //        removeButton.addActionListener(new ActionListener() {
+     //
+     //            @Override
+     //            public void actionPerformed(ActionEvent e) {
+     //                l.deletePerformed(e);
+     //
+     //            }
+     //        });
      * @return the indexes of the selected rows of the list
      */
     public int[] getSelectedText() {
@@ -221,6 +208,6 @@ public class ListDirectoryView extends JFrame {
      * @return the inputText
      */
     public String getInputText() {
-        return inputElement.getText();
+        return searchElement.getText();
     }
 }
