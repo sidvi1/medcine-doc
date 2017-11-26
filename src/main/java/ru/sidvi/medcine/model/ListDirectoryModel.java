@@ -22,6 +22,15 @@ public class ListDirectoryModel extends AbstractTableModel {
 
     private final ArrayList<MedicalRecord> listDirectory = new ArrayList<>();
 
+    public ListDirectoryModel() {
+        //TODO: удалить STUB
+        listDirectory.add(new MedicalRecord("fasdfasdf"));
+        listDirectory.add(new MedicalRecord("yhaasdfasd"));
+        listDirectory.add(new MedicalRecord("ass"));
+        listDirectory.add(new MedicalRecord("awertyesrgesr"));
+        listDirectory.add(new MedicalRecord("adfgsdfg"));
+    }
+
     public void addDirectory(final String directory) {
         int index = listDirectory.size();
 

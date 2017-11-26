@@ -11,6 +11,16 @@ public class MedicalRecord {
     private Date docDate;
     private String name;
 
+    public MedicalRecord() {
+    }
+
+    public MedicalRecord(String name) {
+        // TODO: stub. Удалить
+        this.name = name;
+        this.docDate = new Date();
+        this.id = (int) (Math.random() * 1000);
+    }
+
     public int getId() {
         return id;
     }
