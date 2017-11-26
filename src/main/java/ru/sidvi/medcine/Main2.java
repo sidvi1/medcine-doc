@@ -16,7 +16,7 @@ public class Main2 {
         EditDirectoryView view = new EditDirectoryView(model);
 
         view.pack();
-        view.setLocation(200, 200);
+        view.setLocationRelativeTo(null);
         view.setVisible(true);
     }
 

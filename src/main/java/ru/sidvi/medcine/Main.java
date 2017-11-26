@@ -23,7 +23,7 @@ public class Main {
 		ListDirectoryController controller = new ListDirectoryController(model, view);
 				
 		view.pack();
-		view.setLocation(200, 200);
+		view.setLocationRelativeTo(null);
 		view.setVisible(true);
 	}
 }
