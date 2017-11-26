@@ -1,9 +1,12 @@
 package ru.sidvi.medcine.model;
 
+import ru.sidvi.medcine.model.Entity.MedicalRecord;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Properties;
 
 import javax.swing.AbstractListModel;
@@ -21,37 +24,28 @@ import javax.swing.AbstractListModel;
 public class ListDirectoryModel extends AbstractListModel<Object> {
 	
 	private static final long serialVersionUID = 1L;
-	
-	private final ArrayList<Object> listDirectory = new ArrayList<Object>() ;
-	private final Properties imageProperties = new Properties();
-		
-	public ListDirectoryModel() {
-		InputStream imageStream = getClass().getClassLoader().getResourceAsStream("Images.properties");
-		try {
-			imageProperties.load(imageStream);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public Object getElementAt(int index) {
-		return listDirectory.get(index);
+
+    private final ArrayList<MedicalRecord> listDirectory = new ArrayList<>();
+
+    public MedicalRecord getElementAt(int index) {
+        return listDirectory.get(index);
 	}
 	
 	public int getSize() {
 		return listDirectory.size();
 	}
-	
-	public void addDirectory(final String directory) {		
-		int index=listDirectory.size();
-		String result = imageProperties.getProperty(directory);
-		if(result == null) {
-			listDirectory.add(directory);
-		} else {
-			URL url = getClass().getResource(result);
-			listDirectory.add(url);
-		}		
-		fireIntervalAdded(this, index, index);
+
+    public void addDirectory(final String directory) {
+        int index=listDirectory.size();
+
+        // TODO: connect to entity
+        MedicalRecord record = new MedicalRecord();
+        record.setId((int) (Math.random() * 100));
+        record.setDocDate(new Date());
+        record.setName(directory);
+
+        listDirectory.add(record);
+        fireIntervalAdded(this, index, index);
 	}
 	
 	public void removeDirectory(String directory) {

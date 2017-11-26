@@ -2,6 +2,8 @@
 
 package ru.sidvi.medcine.view.renderer;
 
+import ru.sidvi.medcine.model.Entity.MedicalRecord;
+
 import java.awt.Component;
 import java.net.URL;
 
@@ -22,17 +24,11 @@ public class ImageListCellRenderer extends DefaultListCellRenderer {
 	@Override
 	public Component getListCellRendererComponent(final JList<?> list,
 			Object value, int index, boolean isSelected, boolean cellHasFocus) {
-		/* String transformedValue = (String) value;
-		try {
-			// URL
-		URL url = new URL(transformedValue);
-		} catch (...) {
-			// String
-		}*/
-		if(value instanceof URL) {
-			value = new ImageIcon((URL) value);			
-		}
-		return super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-	}
+
+        MedicalRecord val = (MedicalRecord) value;
+        value = val.getId() + " " + val.getDocDate() + " " + val.getName();
+
+        return super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+    }
 
 }
