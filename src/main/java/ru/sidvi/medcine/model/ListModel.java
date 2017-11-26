@@ -21,6 +21,10 @@ public class ListModel extends AbstractTableModel {
     private static final long serialVersionUID = 1L;
 
     private final ArrayList<MedicalRecord> listDirectory = new ArrayList<>();
+    /**
+     * Индекс выбранной записи
+     */
+    private int selectedIndex;
 
     public ListModel() {
         //TODO: удалить STUB
@@ -86,5 +90,14 @@ public class ListModel extends AbstractTableModel {
         }
 
         throw new IllegalArgumentException();
+    }
+
+
+    public void setSelectedRow(int index) {
+        this.selectedIndex = index;
+    }
+
+    public MedicalRecord getSelected() {
+        return this.listDirectory.get(this.selectedIndex);
     }
 }

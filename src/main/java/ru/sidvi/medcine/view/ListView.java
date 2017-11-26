@@ -34,7 +34,7 @@ public class ListView extends BaseFrame {
     /**
      * Create the frame.
      */
-    public ListView(final ListModel dirModel) {
+    public ListView(final ListModel model) {
 
         // Get translation object and set default locale:
         TextTranslation t = TextTranslation.getInstance();
@@ -103,7 +103,7 @@ public class ListView extends BaseFrame {
         // Create list panel:
         viewTable = new
 
-                JTable(dirModel);
+                JTable(model);
         viewTable.setName("list");
         viewTable.setFillsViewportHeight(true);
         TableColumn idColumn = viewTable.getColumnModel().getColumn(0);
@@ -134,7 +134,9 @@ public class ListView extends BaseFrame {
             @Override
             public void mouseClicked(MouseEvent evt) {
                 if (evt.getClickCount() == 2 && viewTable.getSelectedRow() != -1) {
-                    EditView editView = new EditView(dirModel);
+                    model.setSelectedRow(viewTable.getSelectedRow());
+
+                    EditView editView = new EditView(model);
                     editView.pack();
                     editView.setLocationRelativeTo(null);
                     editView.setVisible(true);

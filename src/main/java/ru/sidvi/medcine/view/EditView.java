@@ -3,13 +3,13 @@ package ru.sidvi.medcine.view;
 import net.miginfocom.swing.MigLayout;
 import ru.sidvi.medcine.ButtonsListener;
 import ru.sidvi.medcine.model.ListModel;
+import ru.sidvi.medcine.model.format.Formatters;
+import ru.sidvi.medcine.support.MaskFormatterWrapper;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormatModified;
-
-import ru.sidvi.medcine.support.MaskFormatterWrapper;
 import java.util.Date;
 
 // ListDirectoryView.java
@@ -27,6 +27,7 @@ public class EditView extends BaseFrame {
     private final JButton saveButton;
     private final JButton cancelButton;
 
+    private final JTextField idElement;
     private final JTextField documentDateElement;
     private final JTextField hospitalElement;
     private final JComboBox docTypeElement;
@@ -34,23 +35,35 @@ public class EditView extends BaseFrame {
     /**
      * Create the frame.
      */
-    public EditView(ListModel dirModel) {
+    public EditView(ListModel model) {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         saveButton = new JButton("Сохранить");
         cancelButton = new JButton("Отмена");
 
-        documentDateElement = new JFormattedTextField(MaskFormatterWrapper.create("####.##.##"));
+        // создаем компоненты
+        documentDateElement = new JFormattedTextField(MaskFormatterWrapper.create("####-##-##"));
+        idElement = new JTextField();
         hospitalElement = new JTextField();
         docTypeElement = new JComboBox();
 
+        // заполняем компоненты
+        idElement.setText(String.valueOf(model.getSelected().getId()));
+        documentDateElement.setText(Formatters.formatDate(model.getSelected().getDocDate()));
+        hospitalElement.setText(model.getSelected().getName());
+               
 
         JPanel panel = new JPanel(new MigLayout("wrap 2", "[][grow,fill]"));
 
-        panel.add(new JLabel("Дата документа    "));
+        panel.add(new JLabel("Идентификатор"));
+        panel.add(this.idElement, "width 100::100");
+
+        panel.add(new JLabel("Дата документа"));
         panel.add(this.documentDateElement, "width 100::100");
+
         panel.add(new JLabel("Мед. Учереждение"));
         panel.add(hospitalElement, "width 100::600");
+
         panel.add(new JLabel("Тип документа"));
         panel.add(docTypeElement, "width 100::200");
 
