@@ -103,7 +103,22 @@ public class EditView extends JDialog {
     }
 
     public void addButtonsListener(final EditButtonsListener l) {
+        final JDialog that = this;
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                that.dispose();
+            }
+        });
+
         saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                l.savePerformed();
+            }
+        });
+
+        GuiSupport.registerListenerOnCtrlEnter(getRootPane(), new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 l.savePerformed();
