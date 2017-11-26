@@ -23,7 +23,7 @@ import java.util.Date;
  *
  * @author Fabien Ipseiz
  */
-public class ListView extends JFrame {
+public class ListView extends BaseFrame {
 
     private static final long serialVersionUID = 1L;
 
@@ -39,24 +39,12 @@ public class ListView extends JFrame {
         TextTranslation t = TextTranslation.getInstance();
 
 
-        final JFrame that = this;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(new BorderLayout(0, 0));
         contentPane.setName(getTitle());
         setContentPane(contentPane);
-
-        // Выход по ESC
-        getRootPane()
-                .registerKeyboardAction(new ActionListener() {
-                                            @Override
-                                            public void actionPerformed(ActionEvent ke) {
-                                                that.dispose();
-                                            }
-                                        },
-                        KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
-                        JComponent.WHEN_IN_FOCUSED_WINDOW);
 
         // Create input field row:
         JLabel entryLabel = new JLabel("Фильтр");

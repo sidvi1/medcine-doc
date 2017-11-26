@@ -20,7 +20,7 @@ import java.util.Date;
  *
  * @author Fabien Ipseiz
  */
-public class EditView extends JFrame {
+public class EditView extends BaseFrame {
 
     private static final long serialVersionUID = 1L;
 
