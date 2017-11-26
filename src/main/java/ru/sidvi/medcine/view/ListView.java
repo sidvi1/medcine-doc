@@ -8,8 +8,6 @@ import ru.sidvi.medcine.support.GuiSupport;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 import java.awt.*;
@@ -95,6 +93,22 @@ public class ListView extends JFrame {
                 if (evt.getClickCount() == 2 && viewTable.getSelectedRow() != -1) {
                     l.showEditPerformed(viewTable.getSelectedRow());
                 }
+            }
+        });
+
+        viewTable.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    l.showEditPerformed(viewTable.getSelectedRow());
+                }
+            }
+        });
+
+        GuiSupport.registerListenerOnCtrlN(getRootPane(), new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                l.showEditPerformed(-1);
             }
         });
     }

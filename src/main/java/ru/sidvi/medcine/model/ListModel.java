@@ -100,8 +100,9 @@ public class ListModel extends AbstractTableModel {
     public void save(MedicalRecord record) {
         if (isNew()) {
             add(record);
+        } else {
+            update(record);
         }
-        update(record);
     }
 
     public void update(MedicalRecord record) {

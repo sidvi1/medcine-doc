@@ -35,4 +35,10 @@ public class GuiSupport {
                 KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, InputEvent.CTRL_MASK),
                 JComponent.WHEN_IN_FOCUSED_WINDOW);
     }
+
+    public static void registerListenerOnCtrlN(JRootPane root, final ActionListener action) {
+        root.registerKeyboardAction(action,
+                KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK),
+                JComponent.WHEN_IN_FOCUSED_WINDOW);
+    }
 }
