@@ -2,14 +2,9 @@ package ru.sidvi.medcine.model;
 
 import ru.sidvi.medcine.model.Entity.MedicalRecord;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
+import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Properties;
-
-import javax.swing.AbstractListModel;
 
 // ListDirectoryModel.java
 // Model
@@ -21,22 +16,14 @@ import javax.swing.AbstractListModel;
  *
  * @author Fabien Ipseiz
  */
-public class ListDirectoryModel extends AbstractListModel<Object> {
-	
-	private static final long serialVersionUID = 1L;
+public class ListDirectoryModel extends AbstractTableModel {
+
+    private static final long serialVersionUID = 1L;
 
     private final ArrayList<MedicalRecord> listDirectory = new ArrayList<>();
 
-    public MedicalRecord getElementAt(int index) {
-        return listDirectory.get(index);
-	}
-	
-	public int getSize() {
-		return listDirectory.size();
-	}
-
     public void addDirectory(final String directory) {
-        int index=listDirectory.size();
+        int index = listDirectory.size();
 
         // TODO: connect to entity
         MedicalRecord record = new MedicalRecord();
@@ -45,23 +32,50 @@ public class ListDirectoryModel extends AbstractListModel<Object> {
         record.setName(directory);
 
         listDirectory.add(record);
-        fireIntervalAdded(this, index, index);
-	}
-	
-	public void removeDirectory(String directory) {
-		int index = listDirectory.lastIndexOf(directory);
-		if (index >= 0) {
-			listDirectory.remove(directory);
-			fireIntervalRemoved(this, index, index);
-		}
-	}
 
-	public void removeMultipleDirectory(int... indices) {
-		if (indices.length > 0) {
-			for (int i = indices.length-1; i >= 0; i--) {
-				listDirectory.remove(indices[i]);
-			}
-			fireIntervalRemoved(this, indices[0], indices[indices.length-1]);
-		}
-	}
+        fireTableRowsInserted(index, index);
+    }
+
+    public void removeDirectory(String directory) {
+        int index = listDirectory.lastIndexOf(directory);
+        if (index >= 0) {
+            listDirectory.remove(directory);
+            fireTableRowsDeleted(index, index);
+        }
+    }
+
+    public void removeMultipleDirectory(int... indices) {
+        if (indices.length > 0) {
+            for (int i = indices.length - 1; i >= 0; i--) {
+                listDirectory.remove(indices[i]);
+            }
+            fireTableRowsDeleted(indices[0], indices[indices.length - 1]);
+        }
+    }
+
+    @Override
+    public int getRowCount() {
+        return listDirectory.size();
+    }
+
+    @Override
+    public int getColumnCount() {
+        return 3;
+    }
+
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        MedicalRecord record = listDirectory.get(rowIndex);
+
+        switch (columnIndex) {
+            case 0:
+                return record.getId();
+            case 1:
+                return record.getDocDate();
+            case 2:
+                return record.getName();
+        }
+
+        throw new IllegalArgumentException();
+    }
 }

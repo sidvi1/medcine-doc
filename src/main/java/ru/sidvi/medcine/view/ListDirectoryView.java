@@ -9,19 +9,14 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.*;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableColumn;
 
 // ListDirectoryView.java
 // Presentation only.  No user actions.
@@ -38,9 +33,9 @@ public class ListDirectoryView extends JFrame {
 	private final JButton addButton;
 	private final JButton removeButton;
 	private final JTextField inputElement;
-	private final JList<Object> viewList ;
-	
-	/**
+    private final JTable viewTable;
+
+    /**
 	 * Create the frame.
 	 */
 	public ListDirectoryView(ListDirectoryModel dirModel)  {
@@ -105,39 +100,42 @@ public class ListDirectoryView extends JFrame {
 			public void changedUpdate(DocumentEvent arg0) {
 			}
 		});
-		
-		// Create list panel:
-		viewList = new JList<Object>(dirModel);
-		viewList.setName("list");
-		viewList.setCellRenderer(new ImageListCellRenderer());
-		getContentPane().add(new JScrollPane(viewList));
+
+
+        TableColumn idColumn = new TableColumn();
+
+        // Create list panel:
+        viewTable = new JTable(dirModel);
+        viewTable.setName("list");
+        viewTable.setFillsViewportHeight(true);
+        getContentPane().add(new JScrollPane(viewTable));
 
 		// Select text if row is double-clicked:
-		viewList.addMouseListener(new MouseAdapter() {
+        viewTable.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseClicked(MouseEvent evt) {
-				if (evt.getClickCount() == 2 && viewList.getSelectedIndex() != -1) {
-					inputElement.setText(viewList.getSelectedValue().toString());
-				}
+                if (evt.getClickCount() == 2 && viewTable.getSelectedRow() != -1) {
+//					inputElement.setText(viewTable.getSelectionModel().toString());
+                }
 			}
 		});
 
-		// Register a ListSelectionListener for the list panel.
-		viewList.addListSelectionListener(new ListSelectionListener() {
-						
-			@Override
-			public void valueChanged(ListSelectionEvent arg0) {
-				if (viewList.getSelectedIndices().length == 0 ){
-					removeButton.setEnabled(false);
-				} else {
-					removeButton.setEnabled(true);
-				}
-				
-			}
-		});
-		
-		// Create buttons panel:
+//		// Register a ListSelectionListener for the list panel.
+//		viewTable.addRowSelectionInterval(new ListSelectionListener() {
+//
+//			@Override
+//			public void valueChanged(ListSelectionEvent arg0) {
+////				if (viewTable.getSelectedIndices().length == 0 ){
+////					removeButton.setEnabled(false);
+////				} else {
+////					removeButton.setEnabled(true);
+////				}
+//
+//			}
+//		});
+
+        // Create buttons panel:
 		JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		addButton=new JButton(t.get("button.add"));
 		addButton.setEnabled(false);
@@ -176,8 +174,8 @@ public class ListDirectoryView extends JFrame {
 	 * @return the indexes of the selected rows of the list
 	 */
 	public int[] getSelectedText() {
-		return viewList.getSelectedIndices();
-	}
+        return viewTable.getSelectedRows();
+    }
 	
 	/**
 	 * @return the inputText
