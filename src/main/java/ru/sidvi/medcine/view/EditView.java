@@ -2,7 +2,7 @@ package ru.sidvi.medcine.view;
 
 import net.miginfocom.swing.MigLayout;
 import ru.sidvi.medcine.ButtonsListener;
-import ru.sidvi.medcine.model.ListDirectoryModel;
+import ru.sidvi.medcine.model.ListModel;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
@@ -20,7 +20,7 @@ import java.util.Date;
  *
  * @author Fabien Ipseiz
  */
-public class EditDirectoryView extends JFrame {
+public class EditView extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
@@ -34,7 +34,7 @@ public class EditDirectoryView extends JFrame {
     /**
      * Create the frame.
      */
-    public EditDirectoryView(ListDirectoryModel dirModel) throws ParseException {
+    public EditView(ListModel dirModel) throws ParseException {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         saveButton = new JButton("Сохранить");

@@ -6,8 +6,8 @@ import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
 import ru.sidvi.medcine.controller.ListDirectoryController;
-import ru.sidvi.medcine.model.ListDirectoryModel;
-import ru.sidvi.medcine.view.ListDirectoryView;
+import ru.sidvi.medcine.model.ListModel;
+import ru.sidvi.medcine.view.ListView;
 import org.fest.swing.edt.FailOnThreadViolationRepaintManager;
 import org.fest.swing.edt.GuiActionRunner;
 import org.fest.swing.edt.GuiQuery;
@@ -34,12 +34,12 @@ public class GUIFunctionalTest {
 
 	@Before
 	public void setUp() {
-		final ListDirectoryModel model = new ListDirectoryModel();
+		final ListModel model = new ListModel();
 
-		ListDirectoryView view = GuiActionRunner
-				.execute(new GuiQuery<ListDirectoryView>() {
-					protected ListDirectoryView executeInEDT() {
-						return new ListDirectoryView(model);
+		ListView view = GuiActionRunner
+				.execute(new GuiQuery<ListView>() {
+					protected ListView executeInEDT() {
+						return new ListView(model);
 					}
 				});
 

@@ -16,13 +16,13 @@ import java.util.Date;
  *
  * @author Fabien Ipseiz
  */
-public class ListDirectoryModel extends AbstractTableModel {
+public class ListModel extends AbstractTableModel {
 
     private static final long serialVersionUID = 1L;
 
     private final ArrayList<MedicalRecord> listDirectory = new ArrayList<>();
 
-    public ListDirectoryModel() {
+    public ListModel() {
         //TODO: удалить STUB
         listDirectory.add(new MedicalRecord("fasdfasdf"));
         listDirectory.add(new MedicalRecord("yhaasdfasd"));

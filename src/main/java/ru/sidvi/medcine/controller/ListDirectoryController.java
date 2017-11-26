@@ -1,8 +1,8 @@
 package ru.sidvi.medcine.controller;
 
 import ru.sidvi.medcine.ButtonsListener;
-import ru.sidvi.medcine.model.ListDirectoryModel;
-import ru.sidvi.medcine.view.ListDirectoryView;
+import ru.sidvi.medcine.model.ListModel;
+import ru.sidvi.medcine.view.ListView;
 
 import java.awt.event.ActionEvent;
 
@@ -16,10 +16,10 @@ import java.awt.event.ActionEvent;
  */
 public class ListDirectoryController implements ButtonsListener {
 
-	private final ListDirectoryModel dirModel;
-	private final ListDirectoryView dirView;
+	private final ListModel dirModel;
+	private final ListView dirView;
 
-	public ListDirectoryController(ListDirectoryModel model, ListDirectoryView view) {
+	public ListDirectoryController(ListModel model, ListView view) {
 		this.dirModel = model;
 		this.dirView = view;
 		//... Add listeners to the view.

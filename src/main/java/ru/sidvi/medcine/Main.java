@@ -2,8 +2,8 @@ package ru.sidvi.medcine;
 // ListDirectotyMain.java
 
 import ru.sidvi.medcine.controller.ListDirectoryController;
-import ru.sidvi.medcine.model.ListDirectoryModel;
-import ru.sidvi.medcine.view.ListDirectoryView;
+import ru.sidvi.medcine.model.ListModel;
+import ru.sidvi.medcine.view.ListView;
 
 /**
  * Description
@@ -17,8 +17,8 @@ public class Main {
     //    need them so there is only one copy of each.
 	public static void main(String[] args) {
 
-		ListDirectoryModel model = new ListDirectoryModel();
-		ListDirectoryView view = new ListDirectoryView(model);
+		ListModel model = new ListModel();
+		ListView view = new ListView(model);
 		@SuppressWarnings("unused")
 		ListDirectoryController controller = new ListDirectoryController(model, view);
 				

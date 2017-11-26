@@ -2,12 +2,11 @@ package ru.sidvi.medcine.view;
 
 import ru.sidvi.medcine.ButtonsListener;
 import ru.sidvi.medcine.TextTranslation;
-import ru.sidvi.medcine.model.ListDirectoryModel;
+import ru.sidvi.medcine.model.ListModel;
 import ru.sidvi.medcine.model.format.Formatters;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.TableCellRenderer;
@@ -24,7 +23,7 @@ import java.util.Date;
  *
  * @author Fabien Ipseiz
  */
-public class ListDirectoryView extends JFrame {
+public class ListView extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
@@ -34,7 +33,7 @@ public class ListDirectoryView extends JFrame {
     /**
      * Create the frame.
      */
-    public ListDirectoryView(ListDirectoryModel dirModel) {
+    public ListView(ListModel dirModel) {
 
         // Get translation object and set default locale:
         TextTranslation t = TextTranslation.getInstance();

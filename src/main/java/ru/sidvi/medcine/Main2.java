@@ -1,7 +1,7 @@
 package ru.sidvi.medcine;
 
-import ru.sidvi.medcine.model.ListDirectoryModel;
-import ru.sidvi.medcine.view.EditDirectoryView;
+import ru.sidvi.medcine.model.ListModel;
+import ru.sidvi.medcine.view.EditView;
 
 import java.text.ParseException;
 
@@ -12,8 +12,8 @@ public class Main2 {
 
 
     public static void main(String[] args) throws ParseException {
-        ListDirectoryModel model = new ListDirectoryModel();
-        EditDirectoryView view = new EditDirectoryView(model);
+        ListModel model = new ListModel();
+        EditView view = new EditView(model);
 
         view.pack();
         view.setLocationRelativeTo(null);
