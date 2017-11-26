@@ -36,7 +36,7 @@ public class EditView extends JDialog {
      * Create the frame.
      */
     public EditView(ListModel model) {
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         GuiSupport.registerCloseOnEsc(getRootPane(), this);
 
         saveButton = new JButton("Сохранить");

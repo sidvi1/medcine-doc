@@ -40,7 +40,7 @@ public class ListView extends JFrame {
         TextTranslation t = TextTranslation.getInstance();
 
         GuiSupport.registerCloseOnEsc(getRootPane(), this);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -59,46 +59,6 @@ public class ListView extends JFrame {
         inputRowPanel.setBorder(new EmptyBorder(0, 0, 0, 0));
         inputRowPanel.add(inputPanel);
         contentPane.add(inputRowPanel, BorderLayout.NORTH);
-
-        // Register a KeyListener for the searchElement text field.
-        searchElement.addKeyListener(new KeyAdapter() {
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-//                    addButton.doClick();
-                    searchElement.selectAll();
-                }
-            }
-        });
-
-        searchElement.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                searchElement.selectAll();
-            }
-        });
-
-        // Register a DocumentListener for the searchElement text field.
-        searchElement.getDocument()
-                .addDocumentListener(new DocumentListener() {
-
-                    @Override
-                    public void removeUpdate(DocumentEvent arg0) {
-                        if (searchElement.getText().isEmpty()) {
-//                            addButton.setEnabled(false);
-                        }
-                    }
-
-                    @Override
-                    public void insertUpdate(DocumentEvent arg0) {
-//                        addButton.setEnabled(true);
-                    }
-
-                    @Override
-                    public void changedUpdate(DocumentEvent arg0) {
-                    }
-                });
 
         // Create list panel:
         viewTable = new JTable(model);
