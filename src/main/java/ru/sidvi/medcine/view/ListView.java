@@ -100,11 +100,8 @@ public class ListView extends JFrame {
                     }
                 });
 
-
         // Create list panel:
-        viewTable = new
-
-                JTable(model);
+        viewTable = new JTable(model);
         viewTable.setName("list");
         viewTable.setFillsViewportHeight(true);
         TableColumn idColumn = viewTable.getColumnModel().getColumn(0);
@@ -126,24 +123,7 @@ public class ListView extends JFrame {
         hospitalColumn.setHeaderValue("Мед. учереждение");
         hospitalColumn.setMinWidth(300);
 
-
         getContentPane().add(new JScrollPane(viewTable));
-
-
-//		// Register a ListSelectionListener for the list panel.
-//		viewTable.addRowSelectionInterval(new ListSelectionListener() {
-//
-//			@Override
-//			public void valueChanged(ListSelectionEvent arg0) {
-////				if (viewTable.getSelectedIndices().length == 0 ){
-////					removeButton.setEnabled(false);
-////				} else {
-////					removeButton.setEnabled(true);
-////				}
-//
-//			}
-//		});
-
     }
 
     public void addButtonsListener(final ListButtonsListener l) {
