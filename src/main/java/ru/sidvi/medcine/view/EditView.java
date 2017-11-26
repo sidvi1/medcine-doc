@@ -5,11 +5,11 @@ import ru.sidvi.medcine.ButtonsListener;
 import ru.sidvi.medcine.model.ListModel;
 
 import javax.swing.*;
-import javax.swing.text.MaskFormatter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormatModified;
-import java.text.ParseException;
+
+import ru.sidvi.medcine.support.MaskFormatterWrapper;
 import java.util.Date;
 
 // ListDirectoryView.java
@@ -34,13 +34,13 @@ public class EditView extends JFrame {
     /**
      * Create the frame.
      */
-    public EditView(ListModel dirModel) throws ParseException {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public EditView(ListModel dirModel) {
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         saveButton = new JButton("Сохранить");
         cancelButton = new JButton("Отмена");
 
-        documentDateElement = new JFormattedTextField(new MaskFormatter("####.##.##"));
+        documentDateElement = new JFormattedTextField(MaskFormatterWrapper.create("####.##.##"));
         hospitalElement = new JTextField();
         docTypeElement = new JComboBox();
 

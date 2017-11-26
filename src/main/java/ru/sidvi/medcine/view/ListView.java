@@ -33,7 +33,7 @@ public class ListView extends JFrame {
     /**
      * Create the frame.
      */
-    public ListView(ListModel dirModel) {
+    public ListView(final ListModel dirModel) {
 
         // Get translation object and set default locale:
         TextTranslation t = TextTranslation.getInstance();
@@ -154,7 +154,10 @@ public class ListView extends JFrame {
             @Override
             public void mouseClicked(MouseEvent evt) {
                 if (evt.getClickCount() == 2 && viewTable.getSelectedRow() != -1) {
-//					searchElement.setText(viewTable.getSelectionModel().toString());
+                    EditView editView = new EditView(dirModel);
+                    editView.pack();
+                    editView.setLocationRelativeTo(null);
+                    editView.setVisible(true);
                 }
             }
         });
