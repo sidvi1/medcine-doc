@@ -3,6 +3,7 @@ package ru.sidvi.medcine.model.format;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -41,6 +42,14 @@ public class Formatters {
 
     public static String formatDate(Date value) {
         return date.get().format(value);
+    }
+
+    public static Date parseDate(String value) {
+        try {
+            return date.get().parse(value);
+        } catch (ParseException e) {
+            throw new IllegalArgumentException("Неверный формат даты.");
+        }
     }
 
     public static String getDatePattern() {

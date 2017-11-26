@@ -1,7 +1,7 @@
 package ru.sidvi.medcine.view;
 
 import net.miginfocom.swing.MigLayout;
-import ru.sidvi.medcine.ButtonsListener;
+import ru.sidvi.medcine.EditButtonsListener;
 import ru.sidvi.medcine.model.ListModel;
 import ru.sidvi.medcine.model.format.Formatters;
 import ru.sidvi.medcine.support.MaskFormatterWrapper;
@@ -9,7 +9,6 @@ import ru.sidvi.medcine.support.MaskFormatterWrapper;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormatModified;
 import java.util.Date;
 
 // ListDirectoryView.java
@@ -48,10 +47,10 @@ public class EditView extends BaseFrame {
         docTypeElement = new JComboBox();
 
         // заполняем компоненты
-        idElement.setText(String.valueOf(model.getSelected().getId()));
-        documentDateElement.setText(Formatters.formatDate(model.getSelected().getDocDate()));
-        hospitalElement.setText(model.getSelected().getName());
-               
+        idElement.setText(String.valueOf(model.getSelectedOrCreateNew().getId()));
+        documentDateElement.setText(Formatters.formatDate(model.getSelectedOrCreateNew().getDocDate()));
+        hospitalElement.setText(model.getSelectedOrCreateNew().getName());
+
 
         JPanel panel = new JPanel(new MigLayout("wrap 2", "[][grow,fill]"));
 
@@ -76,27 +75,6 @@ public class EditView extends BaseFrame {
         setContentPane(panel);
     }
 
-    public void addButtonsListener(final ButtonsListener l) {
-
-        saveButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                l.addPerformed(e);
-
-            }
-        });
-
-        cancelButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                l.deletePerformed(e);
-
-            }
-        });
-    }
-
     /**
      * Полчить название мед. учереждения
      *
@@ -112,7 +90,19 @@ public class EditView extends BaseFrame {
      * @return дата документа
      */
     public Date getDocDate() {
-        DateFormatModified df = new DateFormatModified("yyyy.MM.dd");
-        return df.parse(documentDateElement.getText());
+        return Formatters.parseDate(documentDateElement.getText());
+    }
+
+    public long getId() {
+        return Long.parseLong(idElement.getText());
+    }
+
+    public void addButtonsListener(final EditButtonsListener l) {
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                l.savePerformed();
+            }
+        });
     }
 }

@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public class MedicalRecord {
 
-    private int id;
+    private long id;
     private Date docDate;
     private String name;
 
@@ -21,11 +21,11 @@ public class MedicalRecord {
         this.id = (int) (Math.random() * 1000);
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -60,7 +60,8 @@ public class MedicalRecord {
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (docDate != null ? docDate.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }

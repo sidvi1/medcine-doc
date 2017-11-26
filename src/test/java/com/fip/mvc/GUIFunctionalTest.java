@@ -5,7 +5,7 @@ package com.fip.mvc;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
-import ru.sidvi.medcine.controller.ListDirectoryController;
+import ru.sidvi.medcine.controller.ViewController;
 import ru.sidvi.medcine.model.ListModel;
 import ru.sidvi.medcine.view.ListView;
 import org.fest.swing.edt.FailOnThreadViolationRepaintManager;
@@ -25,75 +25,5 @@ import static org.fest.assertions.api.Assertions.failBecauseExceptionWasNotThrow
  *
  */
 public class GUIFunctionalTest {
-	private FrameFixture window;
 
-	@BeforeClass
-	public static void setUpOnce() {
-		FailOnThreadViolationRepaintManager.install();
-	}
-
-	@Before
-	public void setUp() {
-		final ListModel model = new ListModel();
-
-		ListView view = GuiActionRunner
-				.execute(new GuiQuery<ListView>() {
-					protected ListView executeInEDT() {
-						return new ListView(model);
-					}
-				});
-
-		@SuppressWarnings("unused")
-		ListDirectoryController controller = new ListDirectoryController(model, view);
-		
-		window = new FrameFixture(view);
-		window.show(); // shows the frame to test
-	}
-
-	@After
-	public void tearDown() {
-		window.cleanUp();
-	}
-
-	@Test
-	public void shouldAddTextInListWhenClickingAddButton() {
-		window.button("add").requireDisabled();
-		window.button("del").requireDisabled();
-		window.textBox("inputText").enterText("Some random text");
-		window.button("add").requireEnabled();
-		window.button("add").click();
-		assertThat(window.list("list").item(0).value(), is(equalTo("Some random text")));
-	}
-	
-	@Test
-	public void shouldAddTextInListWhenPressingReturn() {
-		window.textBox("inputText").enterText("Some random text\n");
-		assertThat(window.list("list").item(0).value(), is(equalTo("Some random text")));
-	}
-	
-	@Test
-	public void shouldDeleteTextInListWhenClickingDelButton() {
-		shouldAddTextInListWhenClickingAddButton();
-		window.list("list").clickItem(0);
-		window.button("del").requireEnabled();
-		window.button("del").click();
-		// throwable specific assertions
-		try {
-			assertThat(window.list("list").item(0).value(), is(equalTo("Some random text")));
-			// if IndexOutOfBoundsException was not thrown, test would fail with message :
-			// "Expected IndexOutOfBoundsException to be thrown"
-			failBecauseExceptionWasNotThrown(IndexOutOfBoundsException.class);
-		} catch (IndexOutOfBoundsException e) {
-			//assertThat(e).isInstanceOf(IndexOutOfBoundsException.class);
-		}
-		window.button("del").requireDisabled();
-	}
-	@Test
-	public void doubleClickTextInListShouldActivateButtons() {
-		window.textBox("inputText").enterText("Some random text\n");
-		window.textBox("inputText").deleteText();
-		window.list("list").item(0).doubleClick();
-		window.button("add").requireEnabled();
-		window.button("del").requireEnabled();
-	}
 }

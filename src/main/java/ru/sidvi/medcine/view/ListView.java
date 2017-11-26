@@ -1,6 +1,6 @@
 package ru.sidvi.medcine.view;
 
-import ru.sidvi.medcine.ButtonsListener;
+import ru.sidvi.medcine.ListButtonsListener;
 import ru.sidvi.medcine.TextTranslation;
 import ru.sidvi.medcine.model.ListModel;
 import ru.sidvi.medcine.model.format.Formatters;
@@ -10,7 +10,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.*;
@@ -128,21 +127,6 @@ public class ListView extends BaseFrame {
 
         getContentPane().add(new JScrollPane(viewTable));
 
-        // Select text if row is double-clicked:
-        viewTable.addMouseListener(new MouseAdapter() {
-
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getClickCount() == 2 && viewTable.getSelectedRow() != -1) {
-                    model.setSelectedRow(viewTable.getSelectedRow());
-
-                    EditView editView = new EditView(model);
-                    editView.pack();
-                    editView.setLocationRelativeTo(null);
-                    editView.setVisible(true);
-                }
-            }
-        });
 
 //		// Register a ListSelectionListener for the list panel.
 //		viewTable.addRowSelectionInterval(new ListSelectionListener() {
@@ -160,40 +144,27 @@ public class ListView extends BaseFrame {
 
     }
 
-    public void addButtonsListener(final ButtonsListener l) {
+    public void addButtonsListener(final ListButtonsListener l) {
+        // Select text if row is double-clicked:
+        viewTable.addMouseListener(new MouseAdapter() {
 
-//
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                if (evt.getClickCount() == 2 && viewTable.getSelectedRow() != -1) {
+                    l.showEditPerformed(viewTable.getSelectedRow());
+                }
+            }
+        });
     }
 
-    /**
-     * addButton.addActionListener(new ActionListener() {
-     * //
-     * //            @Override
-     * //            public void actionPerformed(ActionEvent e) {
-     * //                l.addPerformed(e);
-     * //
-     * //            }
-     * //        });
-     * //
-     * //        removeButton.addActionListener(new ActionListener() {
-     * //
-     * //            @Override
-     * //            public void actionPerformed(ActionEvent e) {
-     * //                l.deletePerformed(e);
-     * //
-     * //            }
-     * //        });
-     *
-     * @return the indexes of the selected rows of the list
-     */
-    public int[] getSelectedText() {
+    public int[] getSelectedRows() {
         return viewTable.getSelectedRows();
     }
 
     /**
      * @return the inputText
      */
-    public String getInputText() {
+    public String getSearchText() {
         return searchElement.getText();
     }
 }

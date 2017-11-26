@@ -4,7 +4,6 @@ import ru.sidvi.medcine.model.Entity.MedicalRecord;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
-import java.util.Date;
 
 // ListDirectoryModel.java
 // Model
@@ -20,7 +19,7 @@ public class ListModel extends AbstractTableModel {
 
     private static final long serialVersionUID = 1L;
 
-    private final ArrayList<MedicalRecord> listDirectory = new ArrayList<>();
+    private final ArrayList<MedicalRecord> list = new ArrayList<>();
     /**
      * Индекс выбранной записи
      */
@@ -28,39 +27,31 @@ public class ListModel extends AbstractTableModel {
 
     public ListModel() {
         //TODO: удалить STUB
-        listDirectory.add(new MedicalRecord("fasdfasdf"));
-        listDirectory.add(new MedicalRecord("yhaasdfasd"));
-        listDirectory.add(new MedicalRecord("ass"));
-        listDirectory.add(new MedicalRecord("awertyesrgesr"));
-        listDirectory.add(new MedicalRecord("adfgsdfg"));
+        list.add(new MedicalRecord("fasdfasdf"));
+        list.add(new MedicalRecord("yhaasdfasd"));
+        list.add(new MedicalRecord("ass"));
+        list.add(new MedicalRecord("awertyesrgesr"));
+        list.add(new MedicalRecord("adfgsdfg"));
     }
 
-    public void addDirectory(final String directory) {
-        int index = listDirectory.size();
-
-        // TODO: connect to entity
-        MedicalRecord record = new MedicalRecord();
-        record.setId((int) (Math.random() * 100));
-        record.setDocDate(new Date());
-        record.setName(directory);
-
-        listDirectory.add(record);
-
+    public void add(MedicalRecord record) {
+        int index = list.size();
+        list.add(record);
         fireTableRowsInserted(index, index);
     }
 
     public void removeDirectory(String directory) {
-        int index = listDirectory.lastIndexOf(directory);
+        int index = list.lastIndexOf(directory);
         if (index >= 0) {
-            listDirectory.remove(directory);
+            list.remove(directory);
             fireTableRowsDeleted(index, index);
         }
     }
 
-    public void removeMultipleDirectory(int... indices) {
+    public void removeMultiple(int... indices) {
         if (indices.length > 0) {
             for (int i = indices.length - 1; i >= 0; i--) {
-                listDirectory.remove(indices[i]);
+                list.remove(indices[i]);
             }
             fireTableRowsDeleted(indices[0], indices[indices.length - 1]);
         }
@@ -68,7 +59,7 @@ public class ListModel extends AbstractTableModel {
 
     @Override
     public int getRowCount() {
-        return listDirectory.size();
+        return list.size();
     }
 
     @Override
@@ -78,7 +69,7 @@ public class ListModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        MedicalRecord record = listDirectory.get(rowIndex);
+        MedicalRecord record = list.get(rowIndex);
 
         switch (columnIndex) {
             case 0:
@@ -97,7 +88,28 @@ public class ListModel extends AbstractTableModel {
         this.selectedIndex = index;
     }
 
-    public MedicalRecord getSelected() {
-        return this.listDirectory.get(this.selectedIndex);
+    public MedicalRecord getSelectedOrCreateNew() {
+        // если новый элемент
+        if (isNew()) {
+            return new MedicalRecord();
+        }
+
+        return this.list.get(this.selectedIndex);
+    }
+
+    public void save(MedicalRecord record) {
+        if (isNew()) {
+            add(record);
+        }
+        update(record);
+    }
+
+    public void update(MedicalRecord record) {
+        list.set(this.selectedIndex, record);
+        fireTableRowsInserted(this.selectedIndex, this.selectedIndex);
+    }
+
+    private boolean isNew() {
+        return this.selectedIndex == -1;
     }
 }
