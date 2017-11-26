@@ -2,7 +2,7 @@ package ru.sidvi.medcine.controller;
 
 import ru.sidvi.medcine.EditButtonsListener;
 import ru.sidvi.medcine.ListButtonsListener;
-import ru.sidvi.medcine.model.Entity.MedicalRecord;
+import ru.sidvi.medcine.model.entity.MedicalRecord;
 import ru.sidvi.medcine.model.ListModel;
 import ru.sidvi.medcine.view.EditView;
 import ru.sidvi.medcine.view.ListView;
@@ -41,6 +41,7 @@ public class ViewController implements ListButtonsListener, EditButtonsListener 
         model.setSelectedRow(index);
 
         editView.pack();
+        editView.setModal(true);
         editView.setLocationRelativeTo(null);
         editView.setVisible(true);
     }

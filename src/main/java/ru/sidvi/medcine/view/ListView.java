@@ -4,6 +4,7 @@ import ru.sidvi.medcine.ListButtonsListener;
 import ru.sidvi.medcine.TextTranslation;
 import ru.sidvi.medcine.model.ListModel;
 import ru.sidvi.medcine.model.format.Formatters;
+import ru.sidvi.medcine.support.GuiSupport;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -23,7 +24,7 @@ import java.util.Date;
  *
  * @author Fabien Ipseiz
  */
-public class ListView extends BaseFrame {
+public class ListView extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
@@ -38,8 +39,9 @@ public class ListView extends BaseFrame {
         // Get translation object and set default locale:
         TextTranslation t = TextTranslation.getInstance();
 
-
+        GuiSupport.registerCloseOnEsc(getRootPane(), this);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(new BorderLayout(0, 0));

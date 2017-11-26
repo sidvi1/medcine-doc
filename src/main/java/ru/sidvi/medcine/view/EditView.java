@@ -4,6 +4,7 @@ import net.miginfocom.swing.MigLayout;
 import ru.sidvi.medcine.EditButtonsListener;
 import ru.sidvi.medcine.model.ListModel;
 import ru.sidvi.medcine.model.format.Formatters;
+import ru.sidvi.medcine.support.GuiSupport;
 import ru.sidvi.medcine.support.MaskFormatterWrapper;
 
 import javax.swing.*;
@@ -19,7 +20,7 @@ import java.util.Date;
  *
  * @author Fabien Ipseiz
  */
-public class EditView extends BaseFrame {
+public class EditView extends JDialog {
 
     private static final long serialVersionUID = 1L;
 
@@ -36,6 +37,7 @@ public class EditView extends BaseFrame {
      */
     public EditView(ListModel model) {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        GuiSupport.registerCloseOnEsc(getRootPane(), this);
 
         saveButton = new JButton("Сохранить");
         cancelButton = new JButton("Отмена");

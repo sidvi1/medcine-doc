@@ -1,6 +1,6 @@
 package ru.sidvi.medcine.model;
 
-import ru.sidvi.medcine.model.Entity.MedicalRecord;
+import ru.sidvi.medcine.model.entity.MedicalRecord;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;

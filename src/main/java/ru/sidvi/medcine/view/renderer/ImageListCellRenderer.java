@@ -2,7 +2,7 @@
 
 package ru.sidvi.medcine.view.renderer;
 
-import ru.sidvi.medcine.model.Entity.MedicalRecord;
+import ru.sidvi.medcine.model.entity.MedicalRecord;
 
 import javax.swing.*;
 import java.awt.*;

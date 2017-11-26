@@ -1,4 +1,4 @@
-package ru.sidvi.medcine.model.Entity;
+package ru.sidvi.medcine.model.entity;
 
 import java.util.Date;
 
