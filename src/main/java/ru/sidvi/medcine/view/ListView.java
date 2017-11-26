@@ -9,6 +9,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import java.awt.*;
@@ -109,23 +110,14 @@ public class ListView extends BaseFrame {
         idColumn.setMaxWidth(50);
         idColumn.setHeaderValue("Id");
 
-        TableColumn dateColumn = viewTable.getColumnModel().getColumn(1);
+        final TableColumn dateColumn = viewTable.getColumnModel().getColumn(1);
         dateColumn.setMaxWidth(100);
         dateColumn.setMinWidth(100);
         dateColumn.setHeaderValue("Дата");
-        dateColumn.setCellRenderer(new TableCellRenderer() {
+        dateColumn.setCellRenderer(new DefaultTableCellRenderer() {
             @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
-                                                           boolean hasFocus, int row, int column) {
-                if (!(value instanceof Date)) {
-                    throw new IllegalArgumentException("Значение должно быть типом Date");
-                }
-
-                JTextField editor = new JTextField();
-                editor.setBorder(new EmptyBorder(0, 0, 0, 0));
-                editor.setText(Formatters.formatDate((Date) value));
-//                editor.setBackground((row % 2 == 0) ? Color.white : Color.cyan);
-                return editor;
+            protected void setValue(Object value) {
+                setText(Formatters.formatDate((Date) value));
             }
         });
 
@@ -171,23 +163,25 @@ public class ListView extends BaseFrame {
 //
     }
 
-    /**  addButton.addActionListener(new ActionListener() {
-     //
-     //            @Override
-     //            public void actionPerformed(ActionEvent e) {
-     //                l.addPerformed(e);
-     //
-     //            }
-     //        });
-     //
-     //        removeButton.addActionListener(new ActionListener() {
-     //
-     //            @Override
-     //            public void actionPerformed(ActionEvent e) {
-     //                l.deletePerformed(e);
-     //
-     //            }
-     //        });
+    /**
+     * addButton.addActionListener(new ActionListener() {
+     * //
+     * //            @Override
+     * //            public void actionPerformed(ActionEvent e) {
+     * //                l.addPerformed(e);
+     * //
+     * //            }
+     * //        });
+     * //
+     * //        removeButton.addActionListener(new ActionListener() {
+     * //
+     * //            @Override
+     * //            public void actionPerformed(ActionEvent e) {
+     * //                l.deletePerformed(e);
+     * //
+     * //            }
+     * //        });
+     *
      * @return the indexes of the selected rows of the list
      */
     public int[] getSelectedText() {
