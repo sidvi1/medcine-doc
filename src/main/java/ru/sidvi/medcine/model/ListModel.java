@@ -106,7 +106,7 @@ public class ListModel extends AbstractTableModel {
 
     public void update(MedicalRecord record) {
         list.set(this.selectedIndex, record);
-        fireTableRowsInserted(this.selectedIndex, this.selectedIndex);
+        fireTableRowsUpdated(this.selectedIndex, this.selectedIndex);
     }
 
     private boolean isNew() {
