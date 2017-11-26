@@ -61,16 +61,19 @@ public class EditView extends BaseFrame {
         panel.add(this.documentDateElement, "width 100::100");
 
         panel.add(new JLabel("Мед. Учереждение"));
-        panel.add(hospitalElement, "width 100::600");
+        panel.add(hospitalElement, "width 300::600");
 
         panel.add(new JLabel("Тип документа"));
         panel.add(docTypeElement, "width 100::200");
 
-        JPanel buttonsPanel = new JPanel();
+
+        panel.add(new JPanel());
+
+        JPanel buttonsPanel = new JPanel(new MigLayout());
         buttonsPanel.add(saveButton);
         buttonsPanel.add(cancelButton);
 
-        panel.add(buttonsPanel, "align right");
+        panel.add(buttonsPanel, "align left");
 
         setContentPane(panel);
     }
